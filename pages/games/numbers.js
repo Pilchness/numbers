@@ -91,7 +91,7 @@ export default function Home() {
             gridRow: i,
             margin: '2px',
             textAlign: 'center',
-            fontSize: '500%',
+            fontSize: '200%',
             fontFamily: 'sans-serif',
             display: 'grid',
             placeItems: 'center',
