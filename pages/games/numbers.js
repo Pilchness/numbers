@@ -39,7 +39,25 @@ export default function Home() {
     'green',
     'red'
   ];
-  const contents = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+  //const contents = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+  const contents = [
+    'Jasper',
+    'Felix',
+    'BG1',
+    'BG2',
+    'Boggins',
+    'Daddy',
+    'Mummy',
+    'Eleanor',
+    'Chloe',
+    'Billy Bongles',
+    'Monty',
+    'Purple Ippo',
+    'Chocky',
+    'Felix Cat',
+    'Burger Grills',
+    'Boodles'
+  ];
   const gridBlocks = [];
   for (let i = 1; i < 5; i++) {
     for (let j = 1; j < 5; j++) {
@@ -57,23 +75,23 @@ export default function Home() {
               ? (document.getElementById('block' + counter).style.backgroundColor = 'white')
               : (document.getElementById('block' + counter).style.backgroundColor = colours[counter - 1]);
           }}
-          onMouseEnter={() => {
-            document.getElementById('block' + counter).style.fontSize = '900%';
-            //document.getElementById('block' + counter).style.color = 'white';
+          // onMouseEnter={() => {
+          //   document.getElementById('block' + counter).style.fontSize = '900%';
+          //   //document.getElementById('block' + counter).style.color = 'white';
 
-            document.getElementById('block' + counter).style.transition = 'all 2s ease-in-out';
-          }}
-          onMouseLeave={() => {
-            document.getElementById('block' + counter).style.fontSize = '800%';
-            //document.getElementById('block' + counter).style.color = 'black';
-            document.getElementById('block' + counter).style.transition = 'all 2s ease-in-out';
-          }}
+          //   document.getElementById('block' + counter).style.transition = 'all 2s ease-in-out';
+          // }}
+          // onMouseLeave={() => {
+          //   document.getElementById('block' + counter).style.fontSize = '800%';
+          //   //document.getElementById('block' + counter).style.color = 'black';
+          //   document.getElementById('block' + counter).style.transition = 'all 2s ease-in-out';
+          // }}
           style={{
             gridColumn: j,
             gridRow: i,
             margin: '2px',
             textAlign: 'center',
-            fontSize: '800%',
+            fontSize: '500%',
             fontFamily: 'sans-serif',
             display: 'grid',
             placeItems: 'center',
