@@ -1,7 +1,26 @@
 import Head from 'next/head';
+import { useState } from 'react';
 //import styles from '../../styles/Home.module';
 
 export default function Home() {
+  const [buttonStates, setButtonStates] = useState([
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ]);
   const colours = [
     'blue',
     'green',
@@ -30,30 +49,36 @@ export default function Home() {
           key={'block' + counter}
           id={'block' + counter}
           onClick={() => {
-            document.getElementById('block' + counter).style.backgroundColor = colours[counter - 1];
-            document.getElementById('block' + counter).style.color = 'black';
+            let tempButtonStates = buttonStates;
+            tempButtonStates[counter] = !tempButtonStates[counter];
+            console.log(buttonStates[counter]);
+            setButtonStates(tempButtonStates);
+            buttonStates[counter]
+              ? (document.getElementById('block' + counter).style.backgroundColor = 'white')
+              : (document.getElementById('block' + counter).style.backgroundColor = colours[counter - 1]);
           }}
           onMouseEnter={() => {
-            document.getElementById('block' + counter).style.backgroundColor = 'black';
-            document.getElementById('block' + counter).style.color = 'white';
+            document.getElementById('block' + counter).style.fontSize = '900%';
+            //document.getElementById('block' + counter).style.color = 'white';
 
             document.getElementById('block' + counter).style.transition = 'all 2s ease-in-out';
           }}
           onMouseLeave={() => {
-            //document.getElementById('block' + counter).style.backgroundColor = colours[counter - 1];
-            document.getElementById('block' + counter).style.color = 'black';
+            document.getElementById('block' + counter).style.fontSize = '800%';
+            //document.getElementById('block' + counter).style.color = 'black';
+            document.getElementById('block' + counter).style.transition = 'all 2s ease-in-out';
           }}
           style={{
             gridColumn: j,
             gridRow: i,
-            backgroundColor: colours[counter - 1],
             margin: '2px',
             textAlign: 'center',
             fontSize: '800%',
             fontFamily: 'sans-serif',
             display: 'grid',
             placeItems: 'center',
-            cursor: 'pointer'
+            cursor: 'pointer',
+            backgroundColor: colours[counter - 1]
           }}
         >
           {contents[counter - 1]}
