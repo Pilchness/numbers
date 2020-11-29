@@ -1,80 +1,55 @@
 import Head from 'next/head';
-import styles from '../styles/Home.module.css';
-
-const colours = [
-  'blue',
-  'green',
-  'red',
-  'yellow',
-  'red',
-  'yellow',
-  'blue',
-  'green',
-  'red',
-  'yellow',
-  'yellow',
-  'red',
-  'yellow',
-  'blue',
-  'green',
-  'red'
-];
-
-const contents = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+import { useState, useEffect } from 'react';
+import { FullScreen, useFullScreenHandle } from 'react-full-screen';
+//import styles from '../styles/Home.module.css';
+import Numbers from './games/numbers';
 
 export default function Home() {
-  const gridBlocks = [];
-  for (let i = 1; i < 5; i++) {
-    for (let j = 1; j < 5; j++) {
-      let counter = j + 4 * (i - 1);
-      gridBlocks.push(
-        <div
-          key={'block' + counter}
-          id={'block' + counter}
-          onClick={() => {
-            document.getElementById('block' + counter).style.backgroundColor = colours[counter - 1];
-            document.getElementById('block' + counter).style.color = 'black';
-          }}
-          onMouseEnter={() => {
-            document.getElementById('block' + counter).style.backgroundColor = 'black';
-            document.getElementById('block' + counter).style.color = 'white';
+  const [showGame, setShowGame] = useState(false);
+  const handle = useFullScreenHandle();
 
-            document.getElementById('block' + counter).style.transition = 'all 2s ease-in-out';
-          }}
-          onMouseLeave={() => {
-            //document.getElementById('block' + counter).style.backgroundColor = colours[counter - 1];
-            document.getElementById('block' + counter).style.color = 'black';
-          }}
-          style={{
-            gridColumn: j,
-            gridRow: i,
-            backgroundColor: colours[counter - 1],
-            margin: '2px',
-            textAlign: 'center',
-            fontSize: '800%',
-            fontFamily: 'sans-serif',
-            display: 'grid',
-            placeItems: 'center',
-            cursor: 'pointer'
-          }}
-        >
-          {contents[counter - 1]}
-        </div>
-      );
+  useEffect(() => {
+    if (showGame) {
+      handle.enter();
     }
-  }
+    return () => {
+      document.addEventListener('fullscreenchange', (event) => {
+        if (!document.fullscreenElement) {
+          setShowGame(false);
+        }
+      });
+    };
+  }, [showGame]);
+
   return (
     <div>
-      <Head>
-        <title>Numbers</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        {gridBlocks.map((block) => {
-          return block;
-        })}
-      </main>
+      {showGame ? (
+        <FullScreen handle={handle}>
+          <Numbers />
+        </FullScreen>
+      ) : (
+        <div style={{ display: 'grid', placeItems: 'center', cursor: 'pointer', height: '500px' }}>
+          <button
+            id="mainbutton"
+            onMouseEnter={() => {
+              document.getElementById('mainbutton').style.backgroundColor = 'green';
+            }}
+            onMouseLeave={() => {
+              document.getElementById('mainbutton').style.backgroundColor = 'blue';
+            }}
+            style={{
+              fontSize: '500%',
+              padding: '30px',
+              fontFamily: 'sans-serif',
+              backgroundColor: 'blue',
+              color: 'whitesmoke'
+            }}
+            onClick={() => setShowGame(true)}
+          >
+            Play Numbers
+          </button>
+        </div>
+      )}
     </div>
   );
 }
